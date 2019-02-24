@@ -1,4 +1,4 @@
-<div class="<?php echo $this->get_module_name(); ?> px-3 px-md-4 py-4">
+<div class="<?php echo $this->get_module_name(); ?>">
 	<?php
 	echo get_the_posts_pagination(
 		array(
