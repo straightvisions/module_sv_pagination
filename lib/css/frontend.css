@@ -1,0 +1,47 @@
+.sv_pagination {
+	margin-top: 50px;
+}
+
+.sv_pagination nav.pagination {
+	display: flex;
+	justify-content: center;
+}
+
+.sv_pagination div.nav-links {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+}
+
+.sv_pagination div.nav-links .page-numbers {
+	border: 1px solid rgba( 0, 0, 0, .4 );
+	border-radius: 30px;
+	width: 35px;
+	height: 35px;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	color: #000;
+	margin: 2px;
+	font-size: 14px;
+	cursor: pointer;
+	transition: .25s ease;
+}
+
+.sv_pagination div.nav-links .page-numbers.current,
+.sv_pagination div.nav-links .page-numbers:hover,
+.sv_pagination div.nav-links .page-numbers:active,
+.sv_pagination div.nav-links .page-numbers:focus {
+	background-color: rgba( 0, 0, 0, .8);
+	color: #FFF;
+}
+
+.sv_pagination div.nav-links .page-numbers.current {
+	cursor: default;
+}
+
+.sv_pagination div.nav-links .page-numbers .dashicons {
+	font-size: 14px;
+	width: auto;
+	height: auto;
+}
