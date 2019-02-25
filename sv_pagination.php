@@ -26,9 +26,11 @@ class sv_pagination extends init {
 	}
 
 	public function shortcode( $settings, $content = '' ) {
-		// Load Styles
-		static::$scripts->create( $this )
-		                ->set_source( $this->get_file_url( 'lib/css/frontend.css' ), $this->get_file_path( 'lib/css/frontend.css' ) );
+		if ( is_home() || is_archive() ) {
+			// Load Styles
+			static::$scripts->create( $this )
+			                ->set_source( $this->get_file_url( 'lib/css/frontend.css' ), $this->get_file_path( 'lib/css/frontend.css' ) );
+		}
 
 		$settings								= shortcode_atts(
 			array(
@@ -40,7 +42,7 @@ class sv_pagination extends init {
 
 		ob_start();
 		include( $this->get_file_path( 'lib/tpl/frontend.php' ) );
-		$output									= ob_get_contents();
+		$output									= ( is_home() || is_archive() ? ob_get_contents() : '' );
 		ob_end_clean();
 
 		return $output;
