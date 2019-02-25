@@ -26,24 +26,27 @@ class sv_pagination extends init {
 	}
 
 	public function shortcode( $settings, $content = '' ) {
-		if ( is_home() || is_archive() ) {
+		$output			= '';
+		if ( is_paged() ) {
+			$settings								= shortcode_atts(
+				array(
+					'inline'						=> false
+				),
+				$settings,
+				$this->get_module_name()
+			);
+
 			// Load Styles
 			static::$scripts->create( $this )
-			                ->set_source( $this->get_file_url( 'lib/css/frontend.css' ), $this->get_file_path( 'lib/css/frontend.css' ) );
+				->set_source( $this->get_file_url( 'lib/css/frontend.css' ), $this->get_file_path( 'lib/css/frontend.css' ) )
+				->set_inline($settings['inline']);
+
+			ob_start();
+			include( $this->get_file_path( 'lib/tpl/frontend.php' ) );
+			$output									= ( is_home() || is_archive() ? ob_get_contents() : '' );
+			ob_end_clean();
+
 		}
-
-		$settings								= shortcode_atts(
-			array(
-				'inline'						=> false
-			),
-			$settings,
-			$this->get_module_name()
-		);
-
-		ob_start();
-		include( $this->get_file_path( 'lib/tpl/frontend.php' ) );
-		$output									= ( is_home() || is_archive() ? ob_get_contents() : '' );
-		ob_end_clean();
 
 		return $output;
 	}
