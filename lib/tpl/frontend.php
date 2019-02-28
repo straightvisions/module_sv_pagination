@@ -1,10 +1,10 @@
-<div class="<?php echo $this->get_module_name(); ?>">
+<div class="<?php echo $this->get_prefix(); ?>">
 	<?php
 	echo get_the_posts_pagination(
 		array(
 			'mid_size'				=> 2,
-			'prev_text'				=> '<span class="dashicons dashicons-arrow-left-alt2"></span>',
-			'next_text'				=> '<span class="dashicons dashicons-arrow-right-alt2"></span>',
+			'prev_text'				=> __( 'Previous', $this->get_module_name() ),
+			'next_text'				=> __( 'Next', $this->get_module_name() ),
 			'screen_reader_text'	=> ' ',
 		)
 	);
