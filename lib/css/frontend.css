@@ -22,13 +22,13 @@
 	margin-left: 5px;
 	font-weight: bold;
 	position: relative;
-	color: var( --color-primary );
+	color: rgb( var( --color-primary ) );
 }
 
 .sv_100_sv_pagination .page-numbers::after {
 	display: block;
 	height: 2px;
-	background: var( --color-highlight );
+	background: rgb( var( --color-highlight ) );
 	content: '';
 	margin-top: 10px;
 	width: 0;
