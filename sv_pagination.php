@@ -17,12 +17,20 @@ class sv_pagination extends init {
 	}
 
 	public function init() {
+		// Translates the module
+		load_theme_textdomain( $this->get_module_name(), $this->get_path( 'languages' ) );
+
 		// Module Info
 		$this->set_module_title( 'SV Pagination' );
 		$this->set_module_desc( __( 'This module gives the ability to display pagination for posts & pages with the "[sv_pagination]" shortcode.', $this->get_module_name() ) );
 
 		// Shortcodes
 		add_shortcode( $this->get_module_name(), array( $this, 'shortcode' ) );
+
+		$this->scripts_queue['frontend']			= static::$scripts->create( $this )
+			->set_ID('frontend')
+			->set_path( 'lib/css/frontend.css' )
+			->set_inline(true);
 	}
 
 	public function shortcode( $settings, $content = '' ) {
@@ -37,12 +45,12 @@ class sv_pagination extends init {
 			);
 
 			// Load Styles
-			static::$scripts->create( $this )
-				->set_source( $this->get_file_url( 'lib/css/frontend.css' ), $this->get_file_path( 'lib/css/frontend.css' ) )
-				->set_inline($settings['inline']);
+			$this->scripts_queue['frontend']
+				->set_inline($settings['inline'])
+				->set_is_enqueued();
 
 			ob_start();
-			include( $this->get_file_path( 'lib/tpl/frontend.php' ) );
+			include( $this->get_path( 'lib/tpl/frontend.php' ) );
 			$output									= ( is_home() || is_archive() ? ob_get_contents() : '' );
 			ob_end_clean();
 
