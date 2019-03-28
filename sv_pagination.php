@@ -27,59 +27,34 @@ class sv_pagination extends init {
 		// Shortcodes
 		add_shortcode( $this->get_module_name(), array( $this, 'shortcode' ) );
 
-		$this->register_scripts();
+		$this->scripts_queue['frontend']			= static::$scripts->create( $this )
+			->set_ID('frontend')
+			->set_path( 'lib/css/frontend.css' )
+			->set_inline(true);
 	}
 
-	protected function register_scripts() :sv_pagination {
-		// Register Styles
-		$this->scripts_queue['default']        = static::$scripts
-			->create( $this )
-			->set_ID( 'default' )
-			->set_path( 'lib/frontend/css/default.css' )
-			->set_inline( true );
-
-		return $this;
-	}
-
-	public function shortcode( $settings, $content = '' ) :string {
-		$settings								= shortcode_atts(
-			array(
-				'inline'						=> false,
-			),
-			$settings,
-			$this->get_module_name()
-		);
-
-		return $this->router( $settings );
-	}
-
-	// Handles the routing of the templates
-	protected function router( array $settings ) :string {
+	public function shortcode( $settings, $content = '' ) {
+		$output			= '';
 		if ( is_paged() ) {
-			$template = array(
-				'name'      => 'default',
-				'scripts'   => array(
-					$this->scripts_queue[ 'default' ]->set_inline( $settings['inline'] ),
+			$settings								= shortcode_atts(
+				array(
+					'inline'						=> false
 				),
+				$settings,
+				$this->get_module_name()
 			);
 
-			return $this->load_template( $template, $settings );
+			// Load Styles
+			$this->scripts_queue['frontend']
+				->set_inline($settings['inline'])
+				->set_is_enqueued();
+
+			ob_start();
+			include( $this->get_path( 'lib/tpl/frontend.php' ) );
+			$output									= ( is_home() || is_archive() ? ob_get_contents() : '' );
+			ob_end_clean();
+
 		}
-
-		return '';
-	}
-
-	// Loads the templates
-	protected function load_template( array $template, array $settings ) :string {
-		ob_start();
-		foreach ( $template['scripts'] as $script ) {
-			$script->set_is_enqueued();
-		}
-
-		// Loads the template
-		include ( $this->get_path('lib/frontend/tpl/' . $template['name'] . '.php' ) );
-		$output							        = ob_get_contents();
-		ob_end_clean();
 
 		return $output;
 	}
