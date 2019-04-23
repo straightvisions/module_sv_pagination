@@ -55,18 +55,14 @@ class sv_pagination extends init {
 
 	// Handles the routing of the templates
 	protected function router( array $settings ) :string {
-		if ( is_paged() ) {
-			$template = array(
-				'name'      => 'default',
-				'scripts'   => array(
-					$this->scripts_queue[ 'default' ]->set_inline( $settings['inline'] ),
-				),
-			);
+		$template = array(
+			'name'      => 'default',
+			'scripts'   => array(
+				$this->scripts_queue[ 'default' ]->set_inline( $settings['inline'] ),
+			),
+		);
 
-			return $this->load_template( $template, $settings );
-		}
-
-		return '';
+		return $this->load_template( $template, $settings );
 	}
 
 	// Loads the templates
