@@ -1,6 +1,8 @@
 .sv_100_sv_pagination {
-	padding: 0 var( --padding );
-	margin: 0 auto 50px auto;
+	margin-top: 40px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	margin-bottom: 20px;
 }
 
 .sv_100_sv_pagination .screen-reader-text {
@@ -11,13 +13,13 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	flex-wrap: wrap;
 }
 
 .sv_100_sv_pagination .page-numbers {
 	padding-left: 10px;
 	padding-right: 10px;
-	margin: 5px;
+	margin-right: 5px;
+	margin-left: 5px;
 	font-weight: bold;
 	position: relative;
 	color: rgb( var( --color-primary ) );
@@ -38,23 +40,4 @@
 .sv_100_sv_pagination a.page-numbers:hover::after,
 .sv_100_sv_pagination .page-numbers.current::after {
 	width: 100%;
-}
-
-/* Breakpoints */
-@media ( min-width: 850px ) {
-	.sv_100_sv_pagination {
-		max-width: var( --width-mb );
-	}
-}
-
-@media ( min-width: 1050px ) {
-	.sv_100_sv_pagination {
-		max-width: var( --width-dt );
-	}
-}
-
-@media ( min-width: 1350px ) {
-	.sv_100_sv_pagination {
-		max-width: var( --width-lg );
-	}
 }
