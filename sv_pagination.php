@@ -12,17 +12,10 @@ namespace sv_100;
  */
 
 class sv_pagination extends init {
-	public function __construct() {
-
-	}
-
 	public function init() {
 		// Module Info
 		$this->set_module_title( 'SV Pagination' );
 		$this->set_module_desc( __( 'This module gives the ability to display pagination for posts & pages with the "[sv_pagination]" shortcode.', 'sv_100' ) );
-
-		// Shortcodes
-		add_shortcode( $this->get_module_name(), array( $this, 'shortcode' ) );
 
 		$this->register_scripts();
 	}
@@ -38,7 +31,7 @@ class sv_pagination extends init {
 		return $this;
 	}
 
-	public function shortcode( $settings, $content = '' ) :string {
+	public function load( $settings = array() ) :string {
 		$settings								= shortcode_atts(
 			array(
 				'inline'						=> false,
