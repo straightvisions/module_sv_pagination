@@ -1,8 +1,8 @@
 <?php
 $args = array(
 	'mid_size'				=> 2,
-	'prev_text'				=> __( 'Previous', 'sv_pagination' ),
-	'next_text'				=> __( 'Next', 'sv_pagination' ),
+	'prev_text'				=> __( 'Previous', 'sv_100' ),
+	'next_text'				=> __( 'Next', 'sv_100' ),
 	'screen_reader_text'	=> ' ',
 );
 
