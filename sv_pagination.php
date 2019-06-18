@@ -25,8 +25,7 @@ class sv_pagination extends init {
 		$this->scripts_queue['default']        = static::$scripts
 			->create( $this )
 			->set_ID( 'default' )
-			->set_path( 'lib/frontend/css/default.css' )
-			->set_inline( true );
+			->set_path( 'lib/frontend/css/default.css' );
 
 		return $this;
 	}
