@@ -57,15 +57,25 @@ class sv_pagination extends init {
 	// Loads the templates
 	protected function load_template( array $template, array $settings ) :string {
 		ob_start();
-		foreach ( $template['scripts'] as $script ) {
-			$script->set_is_enqueued();
+		
+		$args = array(
+			'mid_size'				=> 2,
+			'prev_text'				=> __( 'Previous', 'straightvisions_100' ),
+			'next_text'				=> __( 'Next', 'straightvisions_100' ),
+			'screen_reader_text'	=> ' ',
+		);
+		
+		if ( strlen(get_the_posts_pagination( $args  ) ) > 0 ) {
+			foreach ( $template['scripts'] as $script ) {
+				$script->set_is_enqueued();
+			}
+			// Loads the template
+			include( $this->get_path( 'lib/frontend/tpl/' . $template['name'] . '.php' ) );
 		}
-
-		// Loads the template
-		include ( $this->get_path('lib/frontend/tpl/' . $template['name'] . '.php' ) );
+		
 		$output							        = ob_get_contents();
 		ob_end_clean();
-
+		
 		return $output;
 	}
 }
