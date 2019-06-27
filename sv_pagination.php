@@ -15,7 +15,7 @@ class sv_pagination extends init {
 	public function init() {
 		// Module Info
 		$this->set_module_title( 'SV Pagination' );
-		$this->set_module_desc( __( 'This module gives the ability to display pagination for posts & pages with the "[sv_pagination]" shortcode.', 'straightvisions_100' ) );
+		$this->set_module_desc( __( 'This module gives the ability to display pagination for posts & pages with the "[sv_pagination]" shortcode.', 'straightvisions-100' ) );
 
 		$this->register_scripts();
 	}
@@ -60,8 +60,8 @@ class sv_pagination extends init {
 		
 		$args = array(
 			'mid_size'				=> 2,
-			'prev_text'				=> __( 'Previous', 'straightvisions_100' ),
-			'next_text'				=> __( 'Next', 'straightvisions_100' ),
+			'prev_text'				=> __( 'Previous', 'straightvisions-100' ),
+			'next_text'				=> __( 'Next', 'straightvisions-100' ),
 			'screen_reader_text'	=> ' ',
 		);
 		
