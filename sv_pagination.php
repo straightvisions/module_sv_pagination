@@ -13,20 +13,40 @@
 	
 	class sv_pagination extends init {
 		public function init() {
-			// Module Info
-			$this->set_module_title( 'SV Pagination' );
-			$this->set_module_desc( __( 'This module gives the ability to display pagination for posts & pages with the "[sv_pagination]" shortcode.', 'sv100' ) );
-	
-			$this->register_scripts();
+			$this->set_module_title( 'SV Pagination' )
+				 ->set_module_desc( __( 'Manage pagination in posts and pages.', 'sv100' ) )
+				 ->load_settings()
+				 ->register_scripts()
+				 ->set_section_title( __( 'Pagination', 'sv100' ) )
+				 ->set_section_desc( __( 'Settings', 'sv100' ) )
+				 ->set_section_type( 'settings' )
+				 ->set_section_template_path( $this->get_path( 'lib/backend/tpl/settings.php' ) )
+				 ->get_root()
+				 ->add_section( $this );
+		}
+		
+		protected function load_settings(): sv_pagination {
+			// Text Settings
+			$this->get_settings_component( 'font_family','font_family' );
+			$this->get_settings_component( 'font_size','font_size', 16 );
+			$this->get_settings_component( 'text_color','text_color', '#1e1f22' );
+			$this->get_settings_component( 'line_height','line_height', 23 );
+			
+			// Color Settings
+			$this->get_settings_component( 'highlight_color','highlight_color', '#358ae9' );
+			
+			return $this;
 		}
 	
 		protected function register_scripts(): sv_pagination {
 			// Register Styles
-			$this->scripts_queue['default'] =
-				static::$scripts
-					->create( $this )
-					->set_ID( 'default' )
-					->set_path( 'lib/frontend/css/default.css' );
+			$this->get_script( 'default' )
+				 ->set_path( 'lib/frontend/css/default.css' );
+			
+			// Inline Config
+			$this->get_script( 'inline_config' )
+				 ->set_path( 'lib/frontend/css/config.php' )
+				 ->set_inline( true );
 	
 			return $this;
 		}
@@ -48,15 +68,15 @@
 			$template = array(
 				'name'      => 'default',
 				'scripts'   => array(
-					$this->scripts_queue[ 'default' ]->set_inline( $settings['inline'] ),
+					$this->get_script( 'default' )->set_inline( $settings['inline'] ),
 				),
 			);
 	
-			return $this->load_template( $template, $settings );
+			return $this->load_template( $template );
 		}
 	
 		// Loads the templates
-		protected function load_template( array $template, array $settings ): string {
+		protected function load_template( array $template ): string {
 			ob_start();
 			
 			$args = array(
@@ -70,6 +90,9 @@
 				foreach ( $template['scripts'] as $script ) {
 					$script->set_is_enqueued();
 				}
+				
+				$this->get_script( 'inline_config' )->set_is_enqueued();
+				
 				// Loads the template
 				include( $this->get_path( 'lib/frontend/tpl/' . $template['name'] . '.php' ) );
 			}

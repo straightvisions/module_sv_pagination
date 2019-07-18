@@ -21,17 +21,15 @@
 	font-weight: bold;
 	position: relative;
 	text-decoration: none;
-	color: rgb( var( --sv100_sv_color-primary ) );
 }
 
 .sv100_sv_pagination .page-numbers::after {
 	display: block;
 	height: 2px;
-	background: rgb( var( --sv100_sv_color-highlight ) );
 	content: '';
 	margin-top: 10px;
 	width: 0;
-	transition: .25s ease;
+	transition: width .25s ease-in-out;
 	left: 0;
 	position: absolute;
 }
