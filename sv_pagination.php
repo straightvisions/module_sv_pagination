@@ -29,11 +29,11 @@
 			// Text Settings
 			$this->get_settings_component( 'font_family','font_family' );
 			$this->get_settings_component( 'font_size','font_size', 16 );
-			$this->get_settings_component( 'text_color','text_color', '#1e1f22' );
+			$this->get_settings_component( 'text_color','text_color', '#1e1e1e' );
 			$this->get_settings_component( 'line_height','line_height', 23 );
 			
 			// Color Settings
-			$this->get_settings_component( 'highlight_color','highlight_color', '#358ae9' );
+			$this->get_settings_component( 'highlight_color','highlight_color', '#328ce6' );
 			
 			return $this;
 		}
