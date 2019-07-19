@@ -3,7 +3,7 @@
 		?>
 		<div class="sv_section_description"><?php echo $module->get_section_desc(); ?></div>
 
-		<h3 class="divider"><?php _e( 'Text Settings', 'sv100' ); ?></h3>
+		<h3 class="divider"><?php _e( 'Text', 'sv100' ); ?></h3>
 		<div class="sv_setting_flex">
 			<?php
 				echo $module->get_settings_component( 'font_family' )->run_type()->form();
@@ -13,7 +13,7 @@
 			?>
 		</div>
 
-		<h3 class="divider"><?php _e( 'Color Settings', 'sv100' ); ?></h3>
+		<h3 class="divider"><?php _e( 'Colors', 'sv100' ); ?></h3>
 		<div class="sv_setting_flex">
 			<?php
 				echo $module->get_settings_component( 'highlight_color' )->run_type()->form();
