@@ -1,6 +1,8 @@
 .sv100_sv_pagination {
+	display: flex;
+	justify-content: center;
 	padding: 0 var( --sv100_sv_common-padding );
-	margin: 0 auto 50px auto;
+	margin: 2em auto;
 }
 
 .sv100_sv_pagination .screen-reader-text {
