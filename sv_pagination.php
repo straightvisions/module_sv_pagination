@@ -26,14 +26,32 @@
 		}
 		
 		protected function load_settings(): sv_pagination {
-			// Text Settings
+			// Pagination Settings
 			$this->get_settings_component( 'font_family','font_family' );
 			$this->get_settings_component( 'font_size','font_size', 16 );
-			$this->get_settings_component( 'text_color','text_color', '#1e1e1e' );
 			$this->get_settings_component( 'line_height','line_height', 23 );
+			$this->get_settings_component( 'text_color','text_color', '#1e1e1e' );
+			$this->get_settings_component( 'text_deco','text_decoration', 'none' );
+			$this->get_setting( 'text_deco_color' )
+				 ->set_title( __( 'Text underline color', 'sv100' ) )
+				 ->set_description( __( 'Set the color of the underline.' ) )
+				 ->set_default_value( '#328ce6' )
+				 ->load_type( 'color' );
+			$this->get_setting( 'text_deco_thickness' )
+				 ->set_title( __( 'Text underline thickness', 'sv100' ) )
+				 ->set_description( __( 'Set the thickness of the underline, in pixel.' ) )
+				 ->set_default_value( 2 )
+				 ->set_min( 1 )
+				 ->load_type( 'number' );
 			
-			// Color Settings
-			$this->get_settings_component( 'highlight_color','highlight_color', '#328ce6' );
+			// Pagination Settings (Hover/Focus)
+			$this->get_settings_component( 'text_color_hover','text_color', '#1e1e1e' );
+			$this->get_settings_component( 'text_deco_hover','text_decoration', 'underline' );
+			$this->get_setting( 'text_deco_color_hover' )
+				 ->set_title( __( 'Text underline color (Hover/Focus)', 'sv100' ) )
+				 ->set_description( __( 'Set the color of the underline.' ) )
+				 ->set_default_value( '#328ce6' )
+				 ->load_type( 'color' );
 			
 			return $this;
 		}
@@ -41,12 +59,15 @@
 		protected function register_scripts(): sv_pagination {
 			// Register Styles
 			$this->get_script( 'default' )
-				 ->set_path( 'lib/frontend/css/default.css' );
+				 ->set_path( 'lib/frontend/css/default.css' )
+				 ->set_inline( true )
+				 ->set_is_enqueued();
 			
 			// Inline Config
 			$this->get_script( 'inline_config' )
 				 ->set_path( 'lib/frontend/css/config.php' )
-				 ->set_inline( true );
+				 ->set_inline( true )
+				 ->set_is_enqueued();
 	
 			return $this;
 		}
@@ -66,10 +87,7 @@
 		// Handles the routing of the templates
 		protected function router( array $settings ): string {
 			$template = array(
-				'name'      => 'default',
-				'scripts'   => array(
-					$this->get_script( 'default' )->set_inline( $settings['inline'] ),
-				),
+				'name'      => 'default'
 			);
 	
 			return $this->load_template( $template );
@@ -87,11 +105,6 @@
 			);
 			
 			if ( strlen( get_the_posts_pagination( $args  ) ) > 0 ) {
-				foreach ( $template['scripts'] as $script ) {
-					$script->set_is_enqueued();
-				}
-				
-				$this->get_script( 'inline_config' )->set_is_enqueued();
 				
 				// Loads the template
 				include( $this->get_path( 'lib/frontend/tpl/' . $template['name'] . '.php' ) );
