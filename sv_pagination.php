@@ -13,7 +13,7 @@
 	
 	class sv_pagination extends init {
 		public function init() {
-			$this->set_module_title( 'SV Pagination' )
+			$this->set_module_title( __( 'SV Pagination', 'sv100' ) )
 				 ->set_module_desc( __( 'Manage pagination in posts and pages.', 'sv100' ) )
 				 ->load_settings()
 				 ->register_scripts()
