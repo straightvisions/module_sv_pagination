@@ -34,7 +34,7 @@
 			$this->get_settings_component( 'text_deco','text_decoration', 'none' );
 			$this->get_setting( 'text_deco_color' )
 				 ->set_title( __( 'Text underline color', 'sv100' ) )
-				 ->set_description( __( 'Set the color of the underline.' ) )
+				 ->set_description( __( 'Set the color of the underline.', 'sv100' ) )
 				 ->set_default_value( '#328ce6' )
 				 ->load_type( 'color' );
 			$this->get_setting( 'text_deco_thickness' )
