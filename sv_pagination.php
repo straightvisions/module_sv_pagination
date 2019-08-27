@@ -39,7 +39,7 @@
 				 ->load_type( 'color' );
 			$this->get_setting( 'text_deco_thickness' )
 				 ->set_title( __( 'Text underline thickness', 'sv100' ) )
-				 ->set_description( __( 'Set the thickness of the underline, in pixel.' ) )
+				 ->set_description( __( 'Set the thickness of the underline, in pixel.', 'sv100' ) )
 				 ->set_default_value( 2 )
 				 ->set_min( 1 )
 				 ->load_type( 'number' );
@@ -49,7 +49,7 @@
 			$this->get_settings_component( 'text_deco_hover','text_decoration', 'underline' );
 			$this->get_setting( 'text_deco_color_hover' )
 				 ->set_title( __( 'Text underline color (Hover/Focus)', 'sv100' ) )
-				 ->set_description( __( 'Set the color of the underline.' ) )
+				 ->set_description( __( 'Set the color of the underline.', 'sv100' ) )
 				 ->set_default_value( '#328ce6' )
 				 ->load_type( 'color' );
 			
