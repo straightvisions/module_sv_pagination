@@ -64,6 +64,6 @@
 
 @media ( min-width: 1350px ) {
 	.sv100_sv_pagination {
-		max-width: var( --sv100_sv_common-max-width-lg );
+		max-width: var( --sv100_sv_common-max-width-alignwide );
 	}
 }
