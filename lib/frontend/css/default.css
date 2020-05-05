@@ -1,44 +1,52 @@
-.sv100_sv_pagination {
+.sv100_sv_pagination,
+.sv100_sv_content_wrapper .sv100_sv_content_page_links {
+	display: flex;
+	justify-content: center;
 	padding: 0 var( --sv100_sv_common-padding );
-	margin: 0 auto 50px auto;
+	margin: 2em auto;
 }
 
-.sv100_sv_pagination .screen-reader-text {
+.sv100_sv_pagination .screen-reader-text,
+.sv100_sv_content_wrapper .sv100_sv_content_page_links .screen-reader-text {
 	display: none;
 }
 
-.sv100_sv_pagination .nav-links {
+.sv100_sv_pagination .nav-links,
+.sv100_sv_content_wrapper .sv100_sv_content_page_links .nav-links {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	flex-wrap: wrap;
 }
 
-.sv100_sv_pagination .page-numbers {
+.sv100_sv_pagination .page-numbers,
+.sv100_sv_content_wrapper .sv100_sv_content_page_links .post-page-numbers {
+	display: inline-block;
 	padding-left: 10px;
 	padding-right: 10px;
-	margin: 5px;
-	font-weight: bold;
+	margin-left: 5px;
+	margin-right: 5px;
+	margin-bottom: 20px;
 	position: relative;
-	text-decoration: none;
-	color: rgb( var( --sv100_sv_color-primary ) );
 }
 
-.sv100_sv_pagination .page-numbers::after {
+.sv100_sv_pagination .page-numbers::after,
+.sv100_sv_content_wrapper .sv100_sv_content_page_links .post-page-numbers::after {
 	display: block;
-	height: 2px;
-	background: rgb( var( --sv100_sv_color-highlight ) );
 	content: '';
 	margin-top: 10px;
-	width: 0;
-	transition: .25s ease;
 	left: 0;
 	position: absolute;
+	transition: all .25s ease-in-out;
 }
 
-.sv100_sv_pagination a.page-numbers:hover::after,
-.sv100_sv_pagination .page-numbers.current::after {
-	width: 100%;
+.sv100_sv_pagination .page-numbers.current::after,
+.sv100_sv_pagination .page-numbers:hover::after,
+.sv100_sv_pagination .page-numbers:focus::after,
+.sv100_sv_content_page_links .post-page-numbers.current::after,
+.sv100_sv_content_page_links .post-page-numbers:hover::after,
+.sv100_sv_content_page_links .post-page-numbers:focus::after {
+	transition: all .25s ease-in-out;
 }
 
 /* Breakpoints */
@@ -56,6 +64,6 @@
 
 @media ( min-width: 1350px ) {
 	.sv100_sv_pagination {
-		max-width: var( --sv100_sv_common-max-width-lg );
+		max-width: var( --sv100_sv_common-max-width-alignwide );
 	}
 }
