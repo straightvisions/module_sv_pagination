@@ -102,13 +102,13 @@
 	
 		protected function register_scripts(): sv_pagination {
 			// Register Styles
-			$this->get_script( 'default' )
-				 ->set_path( 'lib/frontend/css/default.css' )
+			$this->get_script( 'common' )
+				 ->set_path( 'lib/frontend/css/common.css' )
 				 ->set_inline( true )
 				 ->set_is_enqueued();
 			
 			// Inline Config
-			$this->get_script( 'inline_config' )
+			$this->get_script( 'config' )
 				 ->set_path( 'lib/frontend/css/config.php' )
 				 ->set_inline( true )
 				 ->set_is_enqueued();
