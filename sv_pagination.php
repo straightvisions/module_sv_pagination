@@ -15,8 +15,6 @@
 		public function init() {
 			$this->set_module_title( __( 'SV Pagination', 'sv100' ) )
 				 ->set_module_desc( __( 'Manage pagination in posts and pages.', 'sv100' ) )
-				 ->load_settings()
-				 ->register_scripts()
 				 ->set_section_title( __( 'Pagination', 'sv100' ) )
 				 ->set_section_desc( __( 'Text & Color settings', 'sv100' ) )
 				 ->set_section_type( 'settings' )
@@ -149,6 +147,9 @@
 			);
 			
 			if ( strlen( get_the_posts_pagination( $args  ) ) > 0 ) {
+				if(!is_admin()){
+					$this->load_settings()->register_scripts();
+				}
 				
 				// Loads the template
 				include( $this->get_path( 'lib/frontend/tpl/' . $template['name'] . '.php' ) );
