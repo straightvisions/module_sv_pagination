@@ -1,26 +1,18 @@
 <?php
 	namespace sv100;
 	
-	/**
-	 * @version         4.024
-	 * @author			straightvisions GmbH
-	 * @package			sv100
-	 * @copyright		2019 straightvisions GmbH
-	 * @link			https://straightvisions.com
-	 * @since			1.000
-	 * @license			See license.txt or https://straightvisions.com
-	 */
-	
 	class sv_pagination extends init {
 		public function init() {
 			$this->set_module_title( __( 'SV Pagination', 'sv100' ) )
 				 ->set_module_desc( __( 'Manage pagination in posts and pages.', 'sv100' ) )
-				 ->set_section_title( __( 'Pagination', 'sv100' ) )
-				 ->set_section_desc( __( 'Text & Color settings', 'sv100' ) )
-				 ->set_section_type( 'settings' )
-				 ->set_section_template_path( $this->get_path( 'lib/backend/tpl/settings.php' ) )
-				 ->get_root()
-				 ->add_section( $this );
+				->set_css_cache_active()
+				->set_section_title( $this->get_module_title() )
+				->set_section_desc( $this->get_module_desc() )
+				->set_section_type( 'settings' )
+				->set_section_template_path()
+				->set_section_order(5000)
+				->get_root()
+				->add_section( $this );
 		}
 		
 		protected function load_settings(): sv_pagination {
@@ -97,67 +89,27 @@
 			
 			return $this;
 		}
-	
-		protected function register_scripts(): sv_pagination {
-			// Register Styles
-			$this->get_script( 'common' )
-				 ->set_path( 'lib/frontend/css/common.css' )
-				 ->set_inline( true )
-				 ->set_is_enqueued();
-			
-			// Inline Config
-			$this->get_script( 'config' )
-				 ->set_path( 'lib/frontend/css/config.php' )
-				 ->set_inline( true )
-				 ->set_is_enqueued();
-	
-			return $this;
-		}
-	
 		public function load( $settings = array() ): string {
-			$settings			= shortcode_atts(
-				array(
-					'inline'	=> false,
-				),
-				$settings,
-				$this->get_module_name()
-			);
-	
-			return $this->router( $settings );
-		}
-	
-		// Handles the routing of the templates
-		protected function router( array $settings ): string {
-			$template = array(
-				'name'      => 'default'
-			);
-	
-			return $this->load_template( $template );
-		}
-	
-		// Loads the templates
-		protected function load_template( array $template ): string {
-			ob_start();
-			
+			$output = '';
+
 			$args = array(
 				'mid_size'				=> 2,
 				'prev_text'				=> __( 'Previous', 'sv100' ),
 				'next_text'				=> __( 'Next', 'sv100' ),
 				'screen_reader_text'	=> ' ',
 			);
-			
+
 			if ( strlen( get_the_posts_pagination( $args  ) ) > 0 ) {
 				if(!is_admin()){
 					$this->load_settings()->register_scripts();
 				}
-				
+
 				// Loads the template
+				ob_start();
 				include( $this->get_path( 'lib/frontend/tpl/' . $template['name'] . '.php' ) );
+				$output							        = ob_get_clean();
 			}
-			
-			$output							        = ob_get_contents();
-			ob_end_clean();
-			
+
 			return $output;
 		}
 	}
