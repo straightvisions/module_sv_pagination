@@ -17,27 +17,31 @@
 		
 		protected function load_settings(): sv_pagination {
 			// Pagination Settings
-			$this->get_setting( 'font_family' )
+			$this->get_setting( 'font' )
 				 ->set_title( __( 'Font Family', 'sv100' ) )
 				 ->set_description( __( 'Choose a font for your text.', 'sv100' ) )
 				 ->set_options( $this->get_module( 'sv_webfontloader' ) ? $this->get_module( 'sv_webfontloader' )->get_font_options() : array('' => __('Please activate module SV Webfontloader for this Feature.', 'sv100')) )
+				 ->set_is_responsive(true)
 				 ->load_type( 'select' );
 
 			$this->get_setting( 'font_size' )
 				 ->set_title( __( 'Font Size', 'sv100' ) )
 				 ->set_description( __( 'Font Size in pixel.', 'sv100' ) )
 				 ->set_default_value( 16 )
+				->set_is_responsive(true)
 				 ->load_type( 'number' );
 
 			$this->get_setting( 'line_height' )
 				 ->set_title( __( 'Line Height', 'sv100' ) )
 				 ->set_description( __( 'Set line height as multiplier or with a unit.', 'sv100' ) )
 				 ->set_default_value( 23 )
+				->set_is_responsive(true)
 				 ->load_type( 'text' );
 
 			$this->get_setting( 'text_color' )
 				 ->set_title( __( 'Text Color', 'sv100' ) )
 				 ->set_default_value( '#1e1e1e' )
+				->set_is_responsive(true)
 				 ->load_type( 'color' );
 
 			$this->get_setting( 'text_deco' )
@@ -49,12 +53,14 @@
 					'line-through'	=> __( 'Line Through', 'sv100' ),
 					'overline'		=> __( 'Overline', 'sv100' ),
 				 ) )
+				->set_is_responsive(true)
 				 ->load_type( 'select' );
 
 			$this->get_setting( 'text_deco_color' )
 				 ->set_title( __( 'Text underline color', 'sv100' ) )
 				 ->set_description( __( 'Set the color of the underline.', 'sv100' ) )
 				 ->set_default_value( '#328ce6' )
+				->set_is_responsive(true)
 				 ->load_type( 'color' );
 
 			$this->get_setting( 'text_deco_thickness' )
@@ -62,12 +68,14 @@
 				 ->set_description( __( 'Set the thickness of the underline, in pixel.', 'sv100' ) )
 				 ->set_default_value( 2 )
 				 ->set_min( 1 )
+				->set_is_responsive(true)
 				 ->load_type( 'number' );
 			
 			// Pagination Settings (Hover/Focus)
 			$this->get_setting( 'text_color_hover' )
 				 ->set_title( __( 'Text Color', 'sv100' ) )
 				 ->set_default_value( '#1e1e1e' )
+				->set_is_responsive(true)
 				 ->load_type( 'color' );
 
 			$this->get_setting( 'text_deco_hover' )
@@ -79,13 +87,30 @@
 					'line-through'	=> __( 'Line Through', 'sv100' ),
 					'overline'		=> __( 'Overline', 'sv100' ),
 				 ) )
+				->set_is_responsive(true)
 				 ->load_type( 'select' );
 
 			$this->get_setting( 'text_deco_color_hover' )
 				 ->set_title( __( 'Text underline color (Hover/Focus)', 'sv100' ) )
 				 ->set_description( __( 'Set the color of the underline.', 'sv100' ) )
 				 ->set_default_value( '#328ce6' )
+				->set_is_responsive(true)
 				 ->load_type( 'color' );
+
+			$this->get_setting( 'margin' )
+				->set_title( __( 'Margin', 'sv100' ) )
+				->set_is_responsive(true)
+				->load_type( 'margin' );
+
+			$this->get_setting( 'padding' )
+				->set_title( __( 'Padding', 'sv100' ) )
+				->set_is_responsive(true)
+				->load_type( 'margin' );
+
+			$this->get_setting( 'border' )
+				->set_title( __( 'Border', 'sv100' ) )
+				->set_is_responsive(true)
+				->load_type( 'border' );
 			
 			return $this;
 		}
