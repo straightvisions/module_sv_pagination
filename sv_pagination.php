@@ -34,7 +34,7 @@
 			$this->get_setting( 'line_height' )
 				 ->set_title( __( 'Line Height', 'sv100' ) )
 				 ->set_description( __( 'Set line height as multiplier or with a unit.', 'sv100' ) )
-				 ->set_default_value( 23 )
+				 ->set_default_value( 1.4 )
 				->set_is_responsive(true)
 				 ->load_type( 'text' );
 
@@ -83,9 +83,7 @@
 				 ->set_default_value( 'underline' )
 				 ->set_options( array(
 					'none'			=> __( 'None', 'sv100' ),
-					'underline'		=> __( 'Underline', 'sv100' ),
-					'line-through'	=> __( 'Line Through', 'sv100' ),
-					'overline'		=> __( 'Overline', 'sv100' ),
+					'underline'		=> __( 'Underline', 'sv100' )
 				 ) )
 				->set_is_responsive(true)
 				 ->load_type( 'select' );
