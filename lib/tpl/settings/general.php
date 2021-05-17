@@ -3,6 +3,18 @@
 		<h2><?php _e('General', 'sv100'); ?></h2>
 		<div class="sv_setting_flex">
 			<?php
+				echo $module->get_setting( 'margin' )->form();
+				echo $module->get_setting( 'padding' )->form();
+			?>
+		</div>
+		<div class="sv_setting_flex">
+			<?php
+				echo $module->get_setting( 'border' )->form();
+			?>
+		</div>
+		<h2><?php _e('Items', 'sv100'); ?></h2>
+		<div class="sv_setting_flex">
+			<?php
 				echo $module->get_setting( 'font' )->form();
 				echo $module->get_setting( 'font_size' )->form();
 			?>

@@ -16,6 +16,27 @@
 		}
 		
 		protected function load_settings(): sv_pagination {
+			$this->get_setting( 'margin' )
+				->set_title( __( 'Margin', 'sv100' ) )
+				->set_is_responsive(true)
+				->set_default_value(array(
+					'top'		=> '40px',
+					'right'		=> 'auto',
+					'bottom'	=> '40px',
+					'left'		=> 'auto'
+				))
+				->load_type( 'margin' );
+
+			$this->get_setting( 'padding' )
+				->set_title( __( 'Padding', 'sv100' ) )
+				->set_is_responsive(true)
+				->load_type( 'margin' );
+
+			$this->get_setting( 'border' )
+				->set_title( __( 'Border', 'sv100' ) )
+				->set_is_responsive(true)
+				->load_type( 'border' );
+
 			// Pagination Settings
 			$this->get_setting( 'font' )
 				 ->set_title( __( 'Font Family', 'sv100' ) )
