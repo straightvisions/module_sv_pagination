@@ -1,53 +1,68 @@
 <?php
 	namespace sv100;
 	
-	/**
-	 * @version         4.024
-	 * @author			straightvisions GmbH
-	 * @package			sv100
-	 * @copyright		2019 straightvisions GmbH
-	 * @link			https://straightvisions.com
-	 * @since			1.000
-	 * @license			See license.txt or https://straightvisions.com
-	 */
-	
 	class sv_pagination extends init {
 		public function init() {
 			$this->set_module_title( __( 'SV Pagination', 'sv100' ) )
 				 ->set_module_desc( __( 'Manage pagination in posts and pages.', 'sv100' ) )
-				 ->load_settings()
-				 ->register_scripts()
-				 ->set_section_title( __( 'Pagination', 'sv100' ) )
-				 ->set_section_desc( __( 'Text & Color settings', 'sv100' ) )
-				 ->set_section_type( 'settings' )
-				 ->set_section_template_path( $this->get_path( 'lib/backend/tpl/settings.php' ) )
-				 ->get_root()
-				 ->add_section( $this );
+				->set_css_cache_active()
+				->set_section_title( $this->get_module_title() )
+				->set_section_desc( $this->get_module_desc() )
+				->set_section_template_path()
+				->set_section_order(3900)
+				->set_section_icon('<svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M16 12c0-1.656 1.344-3 3-3s3 1.344 3 3-1.344 3-3 3-3-1.344-3-3zm1 0c0-1.104.896-2 2-2s2 .896 2 2-.896 2-2 2-2-.896-2-2zm-8 0c0-1.656 1.344-3 3-3s3 1.344 3 3-1.344 3-3 3-3-1.344-3-3zm1 0c0-1.104.896-2 2-2s2 .896 2 2-.896 2-2 2-2-.896-2-2zm-8 0c0-1.656 1.344-3 3-3s3 1.344 3 3-1.344 3-3 3-3-1.344-3-3zm1 0c0-1.104.896-2 2-2s2 .896 2 2-.896 2-2 2-2-.896-2-2z"/></svg>')
+				->get_root()
+				->add_section( $this );
 		}
 		
 		protected function load_settings(): sv_pagination {
+			$this->get_setting( 'margin' )
+				->set_title( __( 'Margin', 'sv100' ) )
+				->set_is_responsive(true)
+				->set_default_value(array(
+					'top'		=> '40px',
+					'right'		=> 'auto',
+					'bottom'	=> '40px',
+					'left'		=> 'auto'
+				))
+				->load_type( 'margin' );
+
+			$this->get_setting( 'padding' )
+				->set_title( __( 'Padding', 'sv100' ) )
+				->set_is_responsive(true)
+				->load_type( 'margin' );
+
+			$this->get_setting( 'border' )
+				->set_title( __( 'Border', 'sv100' ) )
+				->set_is_responsive(true)
+				->load_type( 'border' );
+
 			// Pagination Settings
-			$this->get_setting( 'font_family' )
+			$this->get_setting( 'font' )
 				 ->set_title( __( 'Font Family', 'sv100' ) )
 				 ->set_description( __( 'Choose a font for your text.', 'sv100' ) )
-				 ->set_options( $this->get_module( 'sv_webfontloader' )->get_font_options() )
+				 ->set_options( $this->get_module( 'sv_webfontloader' ) ? $this->get_module( 'sv_webfontloader' )->get_font_options() : array('' => __('Please activate module SV Webfontloader for this Feature.', 'sv100')) )
+				 ->set_is_responsive(true)
 				 ->load_type( 'select' );
 
 			$this->get_setting( 'font_size' )
 				 ->set_title( __( 'Font Size', 'sv100' ) )
 				 ->set_description( __( 'Font Size in pixel.', 'sv100' ) )
 				 ->set_default_value( 16 )
+				->set_is_responsive(true)
 				 ->load_type( 'number' );
 
 			$this->get_setting( 'line_height' )
 				 ->set_title( __( 'Line Height', 'sv100' ) )
 				 ->set_description( __( 'Set line height as multiplier or with a unit.', 'sv100' ) )
-				 ->set_default_value( 23 )
+				 ->set_default_value( 1.4 )
+				->set_is_responsive(true)
 				 ->load_type( 'text' );
 
 			$this->get_setting( 'text_color' )
 				 ->set_title( __( 'Text Color', 'sv100' ) )
 				 ->set_default_value( '#1e1e1e' )
+				->set_is_responsive(true)
 				 ->load_type( 'color' );
 
 			$this->get_setting( 'text_deco' )
@@ -59,12 +74,14 @@
 					'line-through'	=> __( 'Line Through', 'sv100' ),
 					'overline'		=> __( 'Overline', 'sv100' ),
 				 ) )
+				->set_is_responsive(true)
 				 ->load_type( 'select' );
 
 			$this->get_setting( 'text_deco_color' )
 				 ->set_title( __( 'Text underline color', 'sv100' ) )
 				 ->set_description( __( 'Set the color of the underline.', 'sv100' ) )
 				 ->set_default_value( '#328ce6' )
+				->set_is_responsive(true)
 				 ->load_type( 'color' );
 
 			$this->get_setting( 'text_deco_thickness' )
@@ -72,12 +89,14 @@
 				 ->set_description( __( 'Set the thickness of the underline, in pixel.', 'sv100' ) )
 				 ->set_default_value( 2 )
 				 ->set_min( 1 )
+				->set_is_responsive(true)
 				 ->load_type( 'number' );
 			
 			// Pagination Settings (Hover/Focus)
 			$this->get_setting( 'text_color_hover' )
 				 ->set_title( __( 'Text Color', 'sv100' ) )
 				 ->set_default_value( '#1e1e1e' )
+				->set_is_responsive(true)
 				 ->load_type( 'color' );
 
 			$this->get_setting( 'text_deco_hover' )
@@ -85,78 +104,56 @@
 				 ->set_default_value( 'underline' )
 				 ->set_options( array(
 					'none'			=> __( 'None', 'sv100' ),
-					'underline'		=> __( 'Underline', 'sv100' ),
-					'line-through'	=> __( 'Line Through', 'sv100' ),
-					'overline'		=> __( 'Overline', 'sv100' ),
+					'underline'		=> __( 'Underline', 'sv100' )
 				 ) )
+				->set_is_responsive(true)
 				 ->load_type( 'select' );
 
 			$this->get_setting( 'text_deco_color_hover' )
 				 ->set_title( __( 'Text underline color (Hover/Focus)', 'sv100' ) )
 				 ->set_description( __( 'Set the color of the underline.', 'sv100' ) )
 				 ->set_default_value( '#328ce6' )
+				->set_is_responsive(true)
 				 ->load_type( 'color' );
+
+			$this->get_setting( 'margin' )
+				->set_title( __( 'Margin', 'sv100' ) )
+				->set_is_responsive(true)
+				->load_type( 'margin' );
+
+			$this->get_setting( 'padding' )
+				->set_title( __( 'Padding', 'sv100' ) )
+				->set_is_responsive(true)
+				->load_type( 'margin' );
+
+			$this->get_setting( 'border' )
+				->set_title( __( 'Border', 'sv100' ) )
+				->set_is_responsive(true)
+				->load_type( 'border' );
 			
 			return $this;
 		}
-	
-		protected function register_scripts(): sv_pagination {
-			// Register Styles
-			$this->get_script( 'default' )
-				 ->set_path( 'lib/frontend/css/default.css' )
-				 ->set_inline( true )
-				 ->set_is_enqueued();
-			
-			// Inline Config
-			$this->get_script( 'inline_config' )
-				 ->set_path( 'lib/frontend/css/config.php' )
-				 ->set_inline( true )
-				 ->set_is_enqueued();
-	
-			return $this;
-		}
-	
 		public function load( $settings = array() ): string {
-			$settings			= shortcode_atts(
-				array(
-					'inline'	=> false,
-				),
-				$settings,
-				$this->get_module_name()
-			);
-	
-			return $this->router( $settings );
-		}
-	
-		// Handles the routing of the templates
-		protected function router( array $settings ): string {
-			$template = array(
-				'name'      => 'default'
-			);
-	
-			return $this->load_template( $template );
-		}
-	
-		// Loads the templates
-		protected function load_template( array $template ): string {
-			ob_start();
-			
+			$output = '';
+
 			$args = array(
 				'mid_size'				=> 2,
 				'prev_text'				=> __( 'Previous', 'sv100' ),
 				'next_text'				=> __( 'Next', 'sv100' ),
 				'screen_reader_text'	=> ' ',
 			);
-			
+
 			if ( strlen( get_the_posts_pagination( $args  ) ) > 0 ) {
-				
+				if(!is_admin()){
+					$this->load_settings()->register_scripts();
+				}
+
 				// Loads the template
-				include( $this->get_path( 'lib/frontend/tpl/' . $template['name'] . '.php' ) );
+				ob_start();
+				require( $this->get_path( 'lib/tpl/frontend/default.php' ) );
+				$output									= ob_get_clean();
 			}
-			
-			$output							        = ob_get_contents();
-			ob_end_clean();
-			
+
 			return $output;
 		}
 	}

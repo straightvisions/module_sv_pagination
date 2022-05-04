@@ -2,8 +2,6 @@
 .sv100_sv_content_wrapper .sv100_sv_content_page_links {
 	display: flex;
 	justify-content: center;
-	padding: 0 var( --sv100_sv_common-padding );
-	margin: 2em auto;
 }
 
 .sv100_sv_pagination .screen-reader-text,
@@ -47,23 +45,4 @@
 .sv100_sv_content_page_links .post-page-numbers:hover::after,
 .sv100_sv_content_page_links .post-page-numbers:focus::after {
 	transition: all .25s ease-in-out;
-}
-
-/* Breakpoints */
-@media ( min-width: 850px ) {
-	.sv100_sv_pagination {
-		max-width: var( --sv100_sv_common-max-width-mb );
-	}
-}
-
-@media ( min-width: 1050px ) {
-	.sv100_sv_pagination {
-		max-width: var( --sv100_sv_common-max-width-dt );
-	}
-}
-
-@media ( min-width: 1350px ) {
-	.sv100_sv_pagination {
-		max-width: var( --sv100_sv_common-max-width-alignwide );
-	}
 }
